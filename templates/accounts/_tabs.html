@@ -1,0 +1,6 @@
+<div class="grid grid-cols-2 rounded-lg border border-line bg-white/60 p-1 text-sm">
+  <a href="{% url 'login' %}"
+     class="rounded-md py-2 text-center {% if active == 'login' %}bg-navy font-medium text-white{% else %}hover:bg-black/5{% endif %}">Login</a>
+  <a href="{% url 'register' %}"
+     class="rounded-md py-2 text-center {% if active == 'register' %}bg-navy font-medium text-white{% else %}hover:bg-black/5{% endif %}">Register</a>
+</div>

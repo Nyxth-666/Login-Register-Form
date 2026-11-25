@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}Register{% endblock %}
+{% block content %}
+<h1 class="font-serif text-3xl font-bold">Begin Your Own Legend.</h1>
+<p class="mt-2 text-sm text-muted">Join the chronicles of Fate, discover legendary heroes, and become part of a world where every destiny has a story.</p>
+
+<div class="mt-6">{% include 'accounts/_tabs.html' with active='register' %}</div>
+
+<form method="post" class="mt-4 space-y-4" novalidate>
+  {% csrf_token %}
+  <div class="grid grid-cols-2 gap-3">
+    {% include 'accounts/_field.html' with field=form.first_name %}
+    {% include 'accounts/_field.html' with field=form.last_name %}
+  </div>
+  {% include 'accounts/_field.html' with field=form.email %}
+
+  <div>
+    {% include 'accounts/_field.html' with field=form.password1 password=True %}
+    {% if not form.password1.errors %}
+      <p class="mt-1 text-xs text-muted">At least 8 characters, with a number and a symbol.</p>
+    {% endif %}
+  </div>
+  {% include 'accounts/_field.html' with field=form.password2 password=True %}
+
+  <div>
+    <label class="flex items-center gap-2 text-xs text-muted">
+      <input type="checkbox" name="terms" {% if form.terms.value %}checked{% endif %} class="h-3.5 w-3.5 accent-navy">
+      <span>I agree to the <a href="#" class="font-medium text-ink">Terms</a> and
+        <a href="#" class="font-medium text-ink">Conditions</a> and
+        <a href="#" class="font-medium text-ink">Privacy Policy</a>.</span>
+    </label>
+    {% for error in form.terms.errors %}<p class="mt-1 text-xs text-red-600">{{ error }}</p>{% endfor %}
+  </div>
+
+  <button type="submit" class="w-full rounded-lg bg-navy py-2.5 text-sm font-medium text-white hover:opacity-90 transition">Create Account</button>
+</form>
+
+<p class="my-4 text-center text-sm text-muted">Or</p>
+{% include 'accounts/_google_button.html' %}
+
+<p class="mt-5 text-center text-xs text-muted">
+  By continuing, you agree to our updated <a href="#" class="font-medium text-ink">Terms and Conditions</a> and <a href="#" class="font-medium text-ink">Privacy Policy</a>.
+</p>
+{% endblock %}

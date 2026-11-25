@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Login{% endblock %}
+{% block content %}
+<h1 class="font-serif text-3xl font-bold leading-tight">Explore the Lore.<br>Discover the Fate.</h1>
+<p class="mt-2 text-sm text-muted">A home for every story, every hero, and every possible fate.</p>
+
+<div class="mt-6">{% include 'accounts/_tabs.html' with active='login' %}</div>
+
+<form method="post" class="mt-4 space-y-4" novalidate>
+  {% csrf_token %}
+  {% for error in form.non_field_errors %}<p class="text-sm text-red-600">{{ error }}</p>{% endfor %}
+
+  {% include 'accounts/_field.html' with field=form.username %}
+  {% include 'accounts/_field.html' with field=form.password password=True %}
+
+  <label class="flex items-center gap-2 text-xs text-muted">
+    <input type="checkbox" class="h-3.5 w-3.5 accent-navy">
+    <span>I agree to the <a href="#" class="font-medium text-ink">Terms</a> and
+      <a href="#" class="font-medium text-ink">Conditions</a> and
+      <a href="#" class="font-medium text-ink">Privacy Policy</a>.</span>
+  </label>
+
+  <button type="submit" class="w-full rounded-lg bg-navy py-2.5 text-sm font-medium text-white hover:opacity-90 transition">Login</button>
+</form>
+
+<p class="my-4 text-center text-sm text-muted">Or</p>
+{% include 'accounts/_google_button.html' %}
+
+{% endblock %}
