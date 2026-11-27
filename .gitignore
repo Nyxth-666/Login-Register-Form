@@ -4,3 +4,5 @@ __pycache__/
 *.pyc
 static/css/output.css
 .env
+node_modules/
+staticfiles/
